@@ -1,0 +1,19 @@
+{
+  "name": "sentences",
+  "version": "1.0.0",
+  "description": "Simple app for sharing sentences.",
+  "author": "Mateusz Pyszczek <mateuszp816@gmail.com>",
+  "main": "server.js",
+  "scripts": {
+    "start": "node startup.js"
+  },
+  "dependencies": {
+    "esm": "^3.2.25",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "@babel/register": "^7.8.3"
+  }
+}
