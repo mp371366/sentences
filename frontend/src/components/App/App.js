@@ -5,7 +5,7 @@ function App({ db }) {
   return (
     <div className={css(styles.app)}>
       <header className={css(styles.header)}>
-        {db}
+        {db || 'Database not specified.'}
       </header>
     </div>
   );

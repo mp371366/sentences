@@ -11,9 +11,7 @@ dotenv.config();
 const HOST = process.env.HOST;
 const PORT = process.env.PORT;
 
-const initialState = {
-  db: process.env.DATABASE_URL,
-};
+const initialState = {};
 
 const app = express();
 
