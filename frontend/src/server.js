@@ -11,7 +11,9 @@ dotenv.config();
 const HOST = process.env.HOST;
 const PORT = process.env.PORT;
 
-const initialState = {};
+const initialState = {
+  api: process.env.API_URL,
+};
 
 const app = express();
 
