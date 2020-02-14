@@ -8,7 +8,7 @@ const serverConfig = {
   target: 'node',
   externals: [nodeExternals()],
   entry: {
-    server: ['@babel/polyfill', './server.js']
+    server: ['@babel/polyfill', './src/server.js']
   },
   mode: 'production',
   output: {
