@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import _ from 'lodash';
 import ErrorContext from '../contexts/ErrorContext';
 import DataContext from '../contexts/DataContext';
 import loadData from '../helpers/loadData';
@@ -8,24 +7,30 @@ import ApiContext from '../contexts/ApiContext';
 function Random() {
   const { setError } = useContext(ErrorContext);
   const data = useContext(DataContext);
-  const [sentences, setSentences] = useState(data);
+  const [sentence, setSentence] = useState(data);
   const { api } = useContext(ApiContext);
 
   useEffect(() => {
-    if (_.isEmpty(sentences)) {
-      loadData(api, 'sentences')
-        .then(setSentences)
-        .catch(setError);
+    if (!sentence) {
+      (async () => {
+        loadData(api, 'sentences/random')
+          .then(setSentence)
+          .catch(setError);
+      })();
     }
-  }, [sentences, api, setError]);
+  }, [sentence, api, setError]);
 
-  return _.isEmpty(sentences)
-    ? 'There is no sentences'
-    : _.map(sentences, ({ text, _id }) =>
-      <section key={_id}>
-        {text}
-      </section>
-    );
+  return (
+    <>
+      <p>
+        {sentence !== null ?
+          (<>{'Sentence for now:'}<i>{sentence}</i></>)
+          : 'Wait for sentence'
+        }
+      </p>
+      {sentence !== null && <button onClick={() => setSentence(null)}>Get another sentence!</button>}
+    </>
+  );
 }
 
 export default Random;

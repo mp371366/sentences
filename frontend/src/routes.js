@@ -13,7 +13,7 @@ const Routes = [
   {
     path: '/random',
     component: Random,
-    loadData: (api) => loadData(api, 'sentences')
+    loadData: (api) => loadData(api, 'sentences/random')
   },
   {
     path: '/add',
