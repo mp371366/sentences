@@ -1,12 +1,4 @@
-GET http://localhost:3000/sentences
-
-###
-
-GET http://localhost:3000/sentences/5e25df70e632882a22eef95c
-
-###
-
-DELETE http://localhost:3000/sentences/5e25df70e632882a22eef95c
+GET http://localhost:3000/sentences/radnom
 
 ###
 
@@ -15,13 +7,4 @@ Content-Type: application/json
 
 {
   "text": "Hello"
-}
-
-###
-
-PATCH http://localhost:3000/sentences/5e25df70e632882a22eef95c
-Content-Type: application/json 
-
-{
-  "text": "Bye"
 }
