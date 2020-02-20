@@ -18,6 +18,7 @@ db.once('open', () => console.log('connected to database'));
 
 const app = express();
 app.use(express.json());
+app.use(express.static('static'));
 app.use((request, result, next) => {
   result.header('Access-Control-Allow-Origin', '*');
   result.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
