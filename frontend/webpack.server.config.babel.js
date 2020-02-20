@@ -24,11 +24,6 @@ const serverConfig = {
     __filename: false,
     __dirname: false,
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      favicon: "./public/favicon.ico"
-    })
-  ]
 }
 
 module.exports = serverConfig;

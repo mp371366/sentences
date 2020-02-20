@@ -22,6 +22,7 @@ const initialState = {
 const app = express();
 
 app.use(express.static(path.join(__dirname)));
+app.use(express.static('static'));
 
 app.get('*', async (req, res) => {
   const { loadData } = Routes.find(route => matchPath(req.url, route)) || {};
