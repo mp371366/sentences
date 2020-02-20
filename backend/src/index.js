@@ -8,8 +8,6 @@ dotenv.config();
 const HOST = process.env.HOST;
 const PORT = process.env.PORT;
 
-const CORS = process.env.CORS;
-
 mongoose.connect(process.env.DATABASE_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -21,7 +19,7 @@ db.once('open', () => console.log('connected to database'));
 const app = express();
 app.use(express.json());
 app.use((request, result, next) => {
-  result.header('Access-Control-Allow-Origin', CORS);
+  result.header('Access-Control-Allow-Origin', '*');
   result.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
 
   next();
