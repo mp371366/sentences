@@ -1,6 +1,7 @@
 const common = require('./webpack.common.config.babel');
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const serverConfig = {
   ...common,
@@ -22,7 +23,12 @@ const serverConfig = {
     Buffer: false,
     __filename: false,
     __dirname: false,
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      favicon: "./public/favicon.ico"
+    })
+  ]
 }
 
 module.exports = serverConfig;

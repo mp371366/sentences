@@ -1,18 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './components/App/App';
+import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 import { StyleSheet } from 'aphrodite';
+import { BrowserRouter } from 'react-router-dom';
+
+const ssr = window.SSR_DATA || {};
 
 const {
   initialState,
-  renderedClassNames
-} = window.SSR_DATA;
+  renderedClassNames,
+  data,
+} = {
+  ...ssr,
+  initialState: {
+    api: 'http://localhost:3000',
+    ...(ssr.initialState || {})
+  }
+};
 
 delete window.SSR_DATA;
 
-ReactDOM.hydrate(<App {...initialState} />, document.getElementById('root'));
+ReactDOM.render(
+  <BrowserRouter>
+    <App {...initialState} data={data} />
+  </BrowserRouter>,
+  document.getElementById('root')
+);
 
 StyleSheet.rehydrate(renderedClassNames);
 

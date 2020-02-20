@@ -19,6 +19,12 @@ const common = {
           'css-loader',
         ],
       },
+      {
+        test: /\.ico$/,
+        use: [
+          'url-loader'
+        ]
+      }
     ]
   },
 }
