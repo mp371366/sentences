@@ -31,9 +31,27 @@ services:
       - "27017:27019"
     networks:
       - back
+  proxy:
+    container_name: proxy
+    image: nginx
+    restart: always
+    volumes:
+      - ../proxy/nginx.conf:/etc/nginx/conf.d/proxy.conf
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - database
+      - api
+    networks:
+      - front
+      - docker-network
 
 networks:
   front:
     driver: bridge
   back:
+    driver: bridge
+  docker-network:
     driver: bridge
