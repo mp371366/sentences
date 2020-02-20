@@ -8,7 +8,7 @@ import Routes from '../routes';
 import { renderRoutes } from 'react-router-config';
 
 function App({ api, data }) {
-  const [error, setError] = useState(null); console.log(api);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {

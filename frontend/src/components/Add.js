@@ -11,8 +11,6 @@ function Add() {
   const { setError } = useContext(ErrorContext);
   const { api } = useContext(ApiContext);
 
-  console.log(api);
-
   const handleSubmit = (event) => {
     event.preventDefault();
 
