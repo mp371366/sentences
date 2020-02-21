@@ -37,6 +37,7 @@ services:
     restart: always
     volumes:
       - ../proxy/nginx.conf:/etc/nginx/conf.d/proxy.conf
+      - /data/nginx/cache
     restart: always
     ports:
       - "80:80"
