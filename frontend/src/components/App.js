@@ -33,7 +33,7 @@ function App({ api, data }) {
           </DataContext.Provider>
         </ErrorContext.Provider>
       </ApiContext.Provider>
-      <a href={api}>API</a>
+      <a href="http://api.my-sentences.com">API</a>
       {error && <pre>{error.message || error}</pre>}
     </div>
   );
