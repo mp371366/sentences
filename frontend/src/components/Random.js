@@ -7,15 +7,25 @@ import ApiContext from '../contexts/ApiContext';
 function Random() {
   const { setError } = useContext(ErrorContext);
   const data = useContext(DataContext);
+  const [waiting, setWaiting] = useState(false);
   const [sentence, setSentence] = useState(data);
   const { api } = useContext(ApiContext);
 
   useEffect(() => {
     if (!sentence) {
       (async () => {
+        setWaiting(true);
         loadData(api, 'sentences/random')
-          .then(setSentence)
-          .catch(setError);
+          .then((result) => {
+            if (typeof result === 'string') {
+              setSentence(result);
+            } else {
+              setSentence(null);
+              setError(result);
+            }
+          })
+          .catch(setError)
+          .finally(() => setWaiting(false));
       })();
     }
   }, [sentence, api, setError]);
@@ -23,12 +33,13 @@ function Random() {
   return (
     <>
       <p>
-        {sentence !== null ?
-          (<>{'Sentence for now:'}<i>{sentence}</i></>)
-          : 'Wait for sentence'
+        {waiting
+          ? 'Wait for sentence' : sentence !== null
+            ? (<>{'Sentence for now:'}<i>{JSON.stringify(sentence)}</i></>)
+            : 'Unable to get sentence.'
         }
       </p>
-      {sentence !== null && <button onClick={() => setSentence(null)}>Get another sentence!</button>}
+      {!waiting && <button onClick={() => setSentence(null)}>Get another sentence!</button>}
     </>
   );
 }
