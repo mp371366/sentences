@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import ErrorContext from '../contexts/ErrorContext';
 import DataContext from '../contexts/DataContext';
 import loadData from '../helpers/loadData';
@@ -8,27 +8,36 @@ function Random() {
   const { setError } = useContext(ErrorContext);
   const data = useContext(DataContext);
   const [waiting, setWaiting] = useState(false);
-  const [sentence, setSentence] = useState(data);
+  const [sentence, setSentence] = useState(null);
   const { api } = useContext(ApiContext);
 
+  const trySetSentence = useCallback(
+    (data) => {
+      if (typeof data === 'string') {
+        setSentence(data);
+      } else {
+        setSentence(null);
+        setError(data);
+      }
+    },
+    [setError]
+  );
+
+  const getSentence = useCallback(
+    () => {
+      setWaiting(true);
+      setSentence(null);
+      loadData(api, 'sentences/random')
+        .then(trySetSentence)
+        .catch(setError)
+        .finally(() => setWaiting(false));
+    },
+    [api, setError, trySetSentence],
+  );
+
   useEffect(() => {
-    if (!sentence) {
-      (async () => {
-        setWaiting(true);
-        loadData(api, 'sentences/random')
-          .then((result) => {
-            if (typeof result === 'string') {
-              setSentence(result);
-            } else {
-              setSentence(null);
-              setError(result);
-            }
-          })
-          .catch(setError)
-          .finally(() => setWaiting(false));
-      })();
-    }
-  }, [sentence, api, setError]);
+    trySetSentence(data);
+  }, [data, trySetSentence]);
 
   return (
     <>
@@ -39,7 +48,7 @@ function Random() {
             : 'Unable to get sentence.'
         }
       </p>
-      {!waiting && <button onClick={() => setSentence(null)}>Get another sentence!</button>}
+      {!waiting && <button onClick={getSentence}>Get another sentence!</button>}
     </>
   );
 }
