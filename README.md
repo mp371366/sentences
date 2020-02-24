@@ -1,4 +1,4 @@
-## Senetences
+# Senetences
 
 Simple webservice when one can share sentences.
 
@@ -10,7 +10,7 @@ Simple webservice when one can share sentences.
 
 `dokcer-compese up --scale web=2`
 
-Visit `localhsot`.
+Visit <http://web.my-sentences.com/>.
 
 ## Issues
 
@@ -18,6 +18,6 @@ Disable nginx before up.
 
 Add info in /etc/hosts
 
-127.0.0.1       http://web.my-sentences.com/
+`127.0.0.1       http://web.my-sentences.com/`
 
-127.0.0.1       http://api.my-sentences.com/
+`127.0.0.1       http://api.my-sentences.com/`
