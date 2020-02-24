@@ -34,7 +34,7 @@ function App({ api, data }) {
         </ErrorContext.Provider>
       </ApiContext.Provider>
       <a href="http://api.my-sentences.com">API</a>
-      {error && <pre>{error.message || error}</pre>}
+      {error && <pre>{JSON.stringify(error.message || error)}</pre>}
     </div>
   );
 }
